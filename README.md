@@ -1,16 +1,57 @@
 # redeban_payment_app
 
-A new Flutter project.
-
 ## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+#### 1. Clone the repository
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+git clone [REPOSITORY_URL]
+cd redeban_payment_app
+```
+
+#### 2. Set up environment variables
+
+Create a `.env` file in the project root with the following variables:
+
+```env
+SERVER_APP_CODE=your_server_app_code_here
+SERVER_APP_KEY=your_server_app_key_here
+CLIENT_APP_CODE=your_client_app_code_here
+CLIENT_APP_KEY=your_client_app_key_here
+```
+
+
+#### 3. Install Flutter dependencies
+
+In the project root, run:
+
+```bash
+flutter pub get
+```
+
+#### 4. Install Android dependencies
+
+Navigate to the android folder and run:
+
+```bash
+cd android
+./gradlew build
+```
+
+Or if you're on Windows:
+
+```bash
+cd android
+gradlew.bat build
+```
+
+#### 5. Run the application
+
+Return to the project root and run:
+
+```bash
+flutter run
+```
