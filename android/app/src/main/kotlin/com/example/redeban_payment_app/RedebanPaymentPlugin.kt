@@ -30,7 +30,7 @@ class RedebanPaymentPlugin : FlutterPlugin, MethodCallHandler {
                 val clientAppKey = call.argument<String>("clientAppKey") ?: ""
                 try {
                     Payment.setEnvironment(testMode, clientAppCode, clientAppKey)
-                    result.success("SDK inicializado correctamente")
+                    result.success("SDK initialized successfully")
                 } catch (e: Exception) {
                     result.error("INIT_ERROR", e.message, null)
                 }
@@ -52,20 +52,20 @@ class RedebanPaymentPlugin : FlutterPlugin, MethodCallHandler {
                 val expYear = call.argument<Int>("expYear") ?: 0
                 val cvc = call.argument<String>("cvc") ?: ""
 
-                // Validar que expMonth y expYear sean válidos
+                // Validate that expMonth and expYear are valid
                 if (expMonth == null || expMonth !in 1..12 || expYear == null || expYear < 0) {
-                    result.error("VALIDATION_ERROR", "Mes o año de expiración inválido", null)
+                    result.error("VALIDATION_ERROR", "Invalid expiration month or year", null)
                     return
                 }
 
-                // Usar el Builder para crear el Card
+                // Use the Builder to create the Card
                 val card = Card.Builder(cardNumber, expMonth, expYear, cvc)
                     .name(holderName)
                     .build()
 
-                // Validar datos de la tarjeta
+                // Validate card data
                 if (!card.validateNumber() || !card.validateExpiryDate() || !card.validateCVC()) {
-                    result.error("VALIDATION_ERROR", "Datos de tarjeta inválidos", null)
+                    result.error("VALIDATION_ERROR", "Invalid card data", null)
                     return
                 }
 
@@ -85,14 +85,14 @@ class RedebanPaymentPlugin : FlutterPlugin, MethodCallHandler {
                             )
                             result.success(response)
                         } else {
-                            result.error("CARD_NULL", "La tarjeta es nula", null)
+                            result.error("CARD_NULL", "Card is null", null)
                         }
                     }
 
                     override fun onError(error: RedebanError?) {
                         result.error(
                             "TOKENIZE_ERROR",
-                            error?.description ?: "Error desconocido",
+                            error?.description ?: "Unknown error",
                             mapOf<String, Any>(
                                 "type" to (error?.type ?: ""),
                                 "help" to (error?.help ?: ""),
